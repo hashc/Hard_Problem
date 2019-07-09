@@ -11,18 +11,16 @@ Id="82946" UserId="3718" Name="Teacher" Date="2008-09-15T08:55:03.923" Class="3"
 
 - Comments.xml
 每一个row包含6个字段： Id, PostId, Score, Text, CreationDate, UserId
-example:
+
 Id="2" PostId="35314" Score="8" Text="Yeah, I didn't believe it until I created a console app - but good lord!  Why would they give you the rope to hang yourself!  I hated that about VB.NET - the OrElse and AndAlso keywords!" CreationDate="2008-09-06T08:09:52.330" UserId="3" 
 
 - Tags.xml
 每一个row包含5个字段： Id, TagName, Count, ExcerptPostId, WikiPostId
-example
 
 Id="1" TagName=".net" Count="283778" ExcerptPostId="3624959" WikiPostId="3607476"
 
 - Votes.xml
 每一个row包含4个字段：Id, PostId, VoteTypeId, CreationDate
-example
 
 Id="1" PostId="1" VoteTypeId="2" CreationDate="2008-07-31T00:00:00.000"
 
