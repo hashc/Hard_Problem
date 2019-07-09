@@ -3,7 +3,7 @@ Data is based on Stack Overflow.
 
 - Badges.xml
 
-eg. <row Id="82946" UserId="3718" Name="Teacher" Date="2008-09-15T08:55:03.923" Class="3" TagBased="False" />
+eg. "<row Id="82946" UserId="3718" Name="Teacher" Date="2008-09-15T08:55:03.923" Class="3" TagBased="False" />"
 
 - Users.xml
 
