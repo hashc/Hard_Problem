@@ -3,8 +3,8 @@ Data is based on Stack Overflow.
 
 数据格式均为xml形式，用xml标记<row />来封装每一行数据
 - Badges.xml
-每一个row包含6个字段： Id, UserId, Name, Date, Class, TagBased
-Id="82946" UserId="3718" Name="Teacher" Date="2008-09-15T08:55:03.923" Class="3" TagBased="False" 
+  -每一个row包含6个字段： Id, UserId, Name, Date, Class, TagBased
+  -Id="82946" UserId="3718" Name="Teacher" Date="2008-09-15T08:55:03.923" Class="3" TagBased="False" 
 
 - Users.xml
 每一个row包含字段Id, Reputation, CreationDate, DisplayName, LastAccessDate, WebsiteUrl, Location, AboutMe, Views, UpVotes, DownVotes, ProfileImageUrl, AccountId 个字段
