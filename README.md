@@ -6,9 +6,10 @@ Data is based on Stack Overflow.
 - Posts.xml
 'id', 'posttypeid', 'acceptedanswerid', 'creationdate', 'score', 'viewcount', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditordisplayname', 'lasteditdate', 'lastactivitydate', 'title', 'tags', 'answercount', 'commentcount', 'favoritecount', 'communityowneddate'
 
+Question部分
 |label|explaination|
 |--|--|
-|id,posttypid|questionID, if posttypid=1 else AnswerID|
+|id,posttypid|questionID, if posttypid=1 |
 |acceptedanswerid|被提问者接受的答案ID|
 |creationdate|创建时间|
 |score|whether it show research effort and is useful and clear,问题质量|
@@ -26,8 +27,18 @@ Data is based on Stack Overflow.
 |favoritecount|对问题的收藏数|
 |communityowneddate|--|
 
+Answer部分
+|label|explaination|
+|--|--|
+|id,posttypeid| AnswerId if posttypeid =2|
+|parentid|回答对应的QuestionId|
+|creationdate||
+|score|is useful and clear,回答质量|
+|body|内容|
+|owneruserid|回答者ID|
+|commentcount|评论数|
 
-['id', 'posttypeid', 'parentid', 'creationdate', 'score', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditdate', 'lastactivitydate', 'commentcount'
+
 
 - Badges.xml 3.71G
 
