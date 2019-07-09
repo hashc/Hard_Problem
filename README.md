@@ -7,6 +7,7 @@ Data is based on Stack Overflow.
 'id', 'posttypeid', 'acceptedanswerid', 'creationdate', 'score', 'viewcount', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditordisplayname', 'lasteditdate', 'lastactivitydate', 'title', 'tags', 'answercount', 'commentcount', 'favoritecount', 'communityowneddate'
 
 |label|explaination|
+|--|--|
 |id,posttypid|questionID, if posttypid=1 else AnswerID|
 |acceptedanswerid|被提问者接受的答案ID|
 |creationdate|创建时间|
