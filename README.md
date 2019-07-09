@@ -25,7 +25,7 @@ Question部分
 |answercount|回答数|
 |commentcount|对问题的评论|
 |favoritecount|对问题的收藏数|
-|communityowneddate|--|
+|communityowneddate||
 
 Answer部分
 |label|explaination|
