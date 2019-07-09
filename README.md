@@ -2,6 +2,32 @@
 Data is based on Stack Overflow.
 
 数据格式均为xml形式，用xml标记<row />来封装每一行数据
+
+- Posts.xml
+'id', 'posttypeid', 'acceptedanswerid', 'creationdate', 'score', 'viewcount', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditordisplayname', 'lasteditdate', 'lastactivitydate', 'title', 'tags', 'answercount', 'commentcount', 'favoritecount', 'communityowneddate'
+
+|label|explaination|
+|id,posttypid|questionID, if posttypid=1 else AnswerID|
+|acceptedanswerid|被提问者接受的答案ID|
+|creationdate|创建时间|
+|score|whether it show research effort and is useful and clear,问题质量|
+|viewcount|浏览量|
+|body|主要内容|
+|owneruserid|提问者or回答者|
+|lasteditoruserid|最后一个编辑问题的人|
+|lasteditordisplayname|最后一个编辑的名字|
+|lasteditdate|最后编辑日期|
+|lastactivitydate|最后被编辑的时间|
+|title|问题的标题|
+|tags|问题的tag|
+|answercount|回答数|
+|commentcount|对问题的评论|
+|favoritecount|对问题的收藏数|
+|communityowneddate|--|
+
+
+['id', 'posttypeid', 'parentid', 'creationdate', 'score', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditdate', 'lastactivitydate', 'commentcount'
+
 - Badges.xml 3.71G
 
 每一个row包含6个字段： Id, UserId, Name, Date, Class, TagBased
@@ -31,3 +57,6 @@ Id="1" TagName=".net" Count="283778" ExcerptPostId="3624959" WikiPostId="3607476
 Id="1" PostId="1" VoteTypeId="2" CreationDate="2008-07-31T00:00:00.000"
 
 - Posts.xml
+'id', 'posttypeid', 'acceptedanswerid', 'creationdate', 'score', 'viewcount', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditordisplayname', 'lasteditdate', 'lastactivitydate', 'title', 'tags', 'answercount', 'commentcount', 'favoritecount', 'communityowneddate'
+|--|--|
+|
