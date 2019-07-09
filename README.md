@@ -3,7 +3,8 @@ Data is based on Stack Overflow.
 
 数据格式均为xml形式，用xml标记<row />来封装每一行数据
 
-- Posts.xml
+- Posts.xml 72G
+
 'id', 'posttypeid', 'acceptedanswerid', 'creationdate', 'score', 'viewcount', 'body', 'owneruserid', 'lasteditoruserid', 'lasteditordisplayname', 'lasteditdate', 'lastactivitydate', 'title', 'tags', 'answercount', 'commentcount', 'favoritecount', 'communityowneddate'
 
 Question部分
