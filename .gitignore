@@ -1,6 +1,7 @@
 *.pkl
 *.csv
-/pic
+pic/
+data/
 __pycache__/
 *.py[cod]
 *$py.class
