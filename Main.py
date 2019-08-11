@@ -14,13 +14,22 @@ import numpy as np
 from datetime import datetime as dt
 from collections import defaultdict
 import os
+from multiprocessing import Pool, cpu_count, current_process
+
+def multifun(mfun,ps):
+    pool = Pool(cpu_count()-2)
+    multi_res= [pool.apply_async(mfun, (p,)) for p in ps]
+    pool.close()
+    pool.join()
+    return [res.get() for res in multi_res]
+
 
 def timelogger(func):
     def inner(*args, **kwargs): #1
         start = time.perf_counter()
         print("[start] "+func.__name__,end='\r')
         res = func(*args, **kwargs) 
-        print("[finish] %s ==Time %.2f=="%(func.__name__,time.perf_counter()-start))
+        print("[finish] %s ==Time %.2f=="%(func.__name__,time.perf_counter()-start),end='\r')
         return func(*args, **kwargs) #2
     return inner
 def getDfvalue(df,Id,label=None):
@@ -31,7 +40,7 @@ def save_pkl(D,fname=None):
         pickle.dump(D,f)
     return 0
 @timelogger
-def load_pkl(D,fname=None):
+def load_pkl(fname=None):
     with open(fname,'rb') as f:
         D = pickle.load(f)
     return D
@@ -126,16 +135,16 @@ def CleanData(fname=None,f_csv=None,):
                 elapsed = (time.perf_counter() - start)
                 print("===Data Clean %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
     elapsed = (time.perf_counter() - start)
-    print("===Data Clean Finish %d   TotalTimeCost %.2f==="%(n,elapsed))
+    print("===Data Clean Finish %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
     Data = pd.DataFrame(data)
     del data
     wt = CalWaitingTime(Data)
     elapsed = (time.perf_counter() - start)
-    print("===Cal WaitingTime %d   TotalTimeCost %.2f==="%(n,elapsed))
+    print("===Cal WaitingTime %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
     Data['WaitingTime']=wt
     Data.to_csv (f_csv, index = None, header=True)
     elapsed = (time.perf_counter() - start)
-    print("===Finish %d   TotalTimeCost %.2f==="%(n,elapsed))
+    print("===Finish %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
     return Data
 @timelogger
 def GetTime(data):
@@ -156,7 +165,7 @@ def TeamCal(QA,Question,Time):
     Q_TotalTeam = defaultdict(lambda:[])
     n = 0 
     start = time.perf_counter()
-    for qid  in QA:
+    for qid in QA:
         n+=1
         atlst = [(aid,Time[aid]) for aid in QA[qid]]
         QA_sortbytime[qid] = SortTime(atlst)
@@ -170,9 +179,9 @@ def TeamCal(QA,Question,Time):
             Q_TotalTeam[tn].append(qid)  
         if n%100000 == 0:
             elapsed = (time.perf_counter() - start)
-            print("===TeamCal %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
+            print("===TeamCal %d / %d  TotalTimeCost %.2f==="%(n,len(QA),elapsed),end='\r')
     elapsed = (time.perf_counter() - start)
-    print("===TeamCal Finish %d   TotalTimeCost %.2f==="%(n,elapsed))
+    print("===TeamCal Finish %d   TotalTimeCost %.2f==="%(n,elapsed),end='\r')
     return  QA_sortbytime,QA_uptoaccept,Q_AcceptTeam,Q_TotalTeam
 def Main(fname,f_csv):
     print("Loading %s"%fname)
@@ -184,9 +193,15 @@ def Main(fname,f_csv):
     Answer = data[data.PostTypeId==2]
     Time = GetTime(data)
     QA = getQA(Answer)
-    QA_sortbytime,QA_uptoaccept,Q_AcceptTeam,Q_TotalTeam = TeamCal(QA,Question,Time)
+    if os.path.exists(fname+'.QA.pkl'):
+        QAD = load_pkl(fname=fname+'.QA.pkl')
+        QA_sortbytime,QA_uptoaccept,Q_AcceptTeam,Q_TotalTeam = QAD['sortbytime'],QAD['uptoaccept'],QAD['AcceptTeam'],QAD['TotalTeam']
+    else:
+        QA_sortbytime,QA_uptoaccept,Q_AcceptTeam,Q_TotalTeam = TeamCal(QA,Question,Time)
+        QAD={'sortbytime':QA_sortbytime,'uptoaccept':QA_uptoaccept,'AcceptTeam':Q_AcceptTeam,'TotalTeam':Q_TotalTeam}
+        save_pkl(QAD,fname = fname+'.QA.pkl')
     Ts = sorted(Q_AcceptTeam.keys())
-    P=[len(Q_AcceptTeam[ts])/len(Q_TotalTeam[ts])  for ts in Ts]
+    P=[[len(Q_AcceptTeam[ts]),len(Q_TotalTeam[ts])]  for ts in Ts]
     Ns = [len(Q_TotalTeam[ts]) for ts in Ts]
     print("==[Finish] %s =="%(fname))
     return Ts,P,Ns
